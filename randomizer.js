@@ -48,7 +48,7 @@ function setup() {
   button = createButton("spin the wheel");
   button.id('spin');
   button.position(20, windowHeight - 50);
-  button.mousePressed(spin);
+  button.mousePressed(spinit);
 
   // Name input
   inputA = createA("#","Enter names");
@@ -78,7 +78,9 @@ function draw() {
     pmouseVec.set(mouseVec);
     mouseVec.x = mouseX - windowWidth / 2;
     mouseVec.y = mouseY - windowHeight / 2;
-    angle = mouseVec.heading();
+    if (mouseVec.mag() < w/2) {
+      angle = mouseVec.heading();
+    }
   }
 
 
@@ -232,17 +234,21 @@ function inputClick() {
 }
 
 function mouseReleased() {
-  var h1 = mouseVec.heading();
-  var h2 = pmouseVec.heading();
-  var mag = h1 - h2;
-  spin(mag*4);
+  if (mouseVec.mag() < w/2) {
+    var h1 = mouseVec.heading();
+    var h2 = pmouseVec.heading();
+    var mag = h1 - h2;
+    mag = constrain(mag, -0.5, 0.5);
+    spin(mag);
+  }
+}
+
+function spinit() {
+  spin(random(0.4,0.5));
 }
 
 // A random spin
 function spin(force) {
-  if (!force) {
-    force = random(0.4,0.5);
-  }
-  dangle += force;
+  dangle = force;
   spinning = true;
 }
