@@ -30,6 +30,11 @@ var total = 0;
 // Entry state
 var state = 0;
 
+var spinning = false;
+
+var mouseVec;
+var pmouseVec;
+
 function setup() {
 
   // Make the canvas full screen size
@@ -63,8 +68,19 @@ function setup() {
 }
 
 function draw() {
+  
+  // A user spin
+  if (mouseIsPressed) {
+    if (!mouseVec) {
+      mouseVec = createVector();
+      pmouseVec = createVector();
+    }
+    pmouseVec.set(mouseVec);
+    mouseVec.x = mouseX - windowWidth / 2;
+    mouseVec.y = mouseY - windowHeight / 2;
+    angle = mouseVec.heading();
+  }
 
-  //background(0);
 
   // clear background
   clear();
@@ -90,7 +106,7 @@ function draw() {
     var which = (i+1)%total;
 
     // Is it inside the slice?
-    if ((testAngle >= begin*sz && testAngle < end*sz) || (testAngle < 0 && i == total-1)) {
+    if (spinning && ((testAngle >= begin*sz && testAngle < end*sz) || (testAngle < 0 && i == total-1))) {
       divs[which].style("background-color","#FFFFFF");
       divs[which].style("color","#000000");
     } else {
@@ -137,10 +153,13 @@ function draw() {
   angle += dangle;
   // Slow down to stop
   dangle *= 0.99;
-  if (dangle < 0.001) dangle = 0;
+  if (dangle < 0.001 && dangle > -0.001) dangle = 0;
   // Stay between 0 and 360
   if (angle > TWO_PI) {
     angle -= TWO_PI;
+  }
+  if (angle < 0) {
+    angle += TWO_PI;
   }
 }
 
@@ -208,11 +227,22 @@ function inputClick() {
     inputA.html("Enter names");
     inputA.position(10,10);
     input.hide();
+    spinning = false;
   }
 }
 
+function mouseReleased() {
+  var h1 = mouseVec.heading();
+  var h2 = pmouseVec.heading();
+  var mag = h1 - h2;
+  spin(mag*4);
+}
+
 // A random spin
-function spin() {
-  var force = random(0.4,0.5);
+function spin(force) {
+  if (!force) {
+    force = random(0.4,0.5);
+  }
   dangle += force;
+  spinning = true;
 }
