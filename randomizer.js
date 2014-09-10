@@ -67,7 +67,7 @@ function setup() {
   gitimg.id('gitimg');
   github.child('gitimg');
   gitimg.attribute('style','position: absolute; top: 0; right: 0; border: 0;');
-  
+
   // First pass at names
   createNames();
 
@@ -252,12 +252,13 @@ function mouseReleased() {
 }
 
 function spinit() {
+
   var force = random(0.4,0.5);
   if (random(1) < 0.5) {
     force *= -1;
   }
 
-  spin();
+  spin(force);
 }
 
 // A random spin
