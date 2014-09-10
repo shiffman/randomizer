@@ -60,6 +60,14 @@ function setup() {
   input.attribute("rows",20);
   input.hide();
 
+
+  // Make a silly github thing
+  var github = createA('https://github.com/shiffman/randomizer','');
+  var gitimg = createImg('https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png');
+  gitimg.id('gitimg');
+  github.child('gitimg');
+  gitimg.attribute('style','position: absolute; top: 0; right: 0; border: 0;');
+  
   // First pass at names
   createNames();
 
@@ -244,7 +252,12 @@ function mouseReleased() {
 }
 
 function spinit() {
-  spin(random(0.4,0.5));
+  var force = random(0.4,0.5);
+  if (random(1) < 0.5) {
+    force *= -1;
+  }
+
+  spin();
 }
 
 // A random spin
