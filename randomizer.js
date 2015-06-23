@@ -1,8 +1,12 @@
 
 // The names
-var names;
+var names = [];
 // Divs to hold names
 var divs;
+
+var selected;
+
+
 
 // Canvas for wheel
 var canvas;
@@ -35,6 +39,8 @@ var spinning = false;
 var mouseVec;
 var pmouseVec;
 
+var removeButton;
+
 function setup() {
 
   // Make the canvas full screen size
@@ -46,9 +52,14 @@ function setup() {
 
   // Spin button
   button = createButton("spin the wheel");
-  button.id('spin');
+  button.class('button');
   button.position(20, windowHeight - 50);
   button.mousePressed(spinit);
+
+  removeButton = createButton('remove selected');
+  removeButton.class('button');
+  removeButton.mousePressed(removeName);
+  removeButton.position(20, windowHeight - 100)
 
   // Name input
   inputA = createA("#","Enter names");
@@ -116,7 +127,8 @@ function draw() {
     var which = (i+1)%total;
 
     // Is it inside the slice?
-    if (spinning && ((testAngle >= begin*sz && testAngle < end*sz) || (testAngle < 0 && i == total-1))) {
+    if (((testAngle >= begin*sz && testAngle < end*sz) || (testAngle < 0 && i == total-1))) {
+      selected = which;
       divs[which].style("background-color","#FFFFFF");
       divs[which].style("color","#000000");
     } else {
@@ -249,6 +261,11 @@ function mouseReleased() {
     mag = constrain(mag, -0.5, 0.5);
     spin(mag);
   }
+}
+
+function removeName() {
+  names.splice(selected,1);
+  createNames();
 }
 
 function spinit() {
