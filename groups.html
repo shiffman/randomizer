@@ -1,0 +1,150 @@
+<head>
+  <!--<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'> -->
+  <script language="javascript" type="text/javascript" src="lib/p5.js"></script>
+  <script language="javascript" type="text/javascript" src="lib/p5.dom.js"></script>
+  <script src="//www.parsecdn.com/js/parse-1.4.2.min.js"></script>
+  <script language="javascript" type="text/javascript" src="js/data.js"></script>
+  <link rel="stylesheet" href="style/style.css">
+
+  <script>
+
+
+  function loaded() {
+    if (!names) {
+      names = ['oops','i','didn\'t', 'load','any','names'];
+    }
+
+    for (var i = 0; i < names.length; i++) {
+      var n = createDiv(names[i]);
+      n.parent('names');
+    }
+  }
+
+
+
+  function setup() {
+    Parse.initialize("AT3yu7k46UyerBgi8vt1KB9WEGP4kV9YCOKD8zMK", "6OOxWTjbLNBvdEL7tftynyXlZmHjok04MsozzZ0m");
+
+    loadParse(loaded);
+
+    //names = ['dan','aliki','elias','olympia','one','two'];
+
+
+    var shuffleButton = getElement('shuffle');
+
+    shuffleButton.mousePressed(function() {
+      var num = getElement('num').value();
+      var total = floor(names.length / num);
+
+      namescopy = names.slice();//copy(names);
+
+      var groups = [];
+      for (var i = 0; i < total; i++) {
+        var group = [];
+        for (var j = 0; j < num; j++) {
+          var index = floor(random(namescopy.length));
+          group.push(namescopy[index]);
+          namescopy.splice(index,1);
+        }
+        groups.push(group);
+      }
+
+      if (namescopy.length > 0) {
+        groups.push(namescopy);
+      }
+
+      buildTable(groups);
+      console.log(groups);
+    });
+
+  }
+
+
+  function buildTable(groups) {
+
+    var allcells = getElements('tablecell');
+    for (var i = 0; i < allcells.length; i++) {
+      allcells[i].remove();
+    }
+
+
+    for (var i = 0; i < groups.length; i++) {
+      var th = createElement('th');
+      th.html('Station ' + i);
+      th.class('tablecell')
+      th.parent('groups');
+
+      for (var j = 0; j < groups[i].length; j++) {
+        if (i === 0) {
+          var tr = createElement('tr');
+          tr.id('row'+j);
+          tr.class('tablecell');
+          tr.parent('tbody');
+        }
+
+        var td = createElement('td');
+        td.html(groups[i][j]);
+        td.class('tablecell');    
+        td.parent('row'+j);
+
+      
+      }
+
+    }
+  }
+
+
+
+  </script>
+
+  <style>
+/*    body {
+      background-color: #000000;
+      font-family: 'Source Code Pro', serif;
+      font-size: 16px;
+    }*/
+
+    .button {
+      font-family: 'Source Code Pro', serif;
+      font-size: 16px;
+      width: 200px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <h1>Shuffle into groups</h1>
+
+  <div id="names"></div>
+
+  <p>
+    Number in each group: 
+    <select id="num">
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option selected value="5">5</option>
+    </select>
+  </p>
+
+  <p>Members can't repeat stations: <input type = "checkbox"></input></p>
+
+  <p><button id = "shuffle">shuffle</button></p>
+
+  <table>
+    <thead>
+      <tr id="groups">
+      </tr>
+    </thead>
+    <tbody id='tbody'>
+    </tbody>
+  </table>
+
+
+
+
+
+
+</body>

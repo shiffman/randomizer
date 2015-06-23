@@ -70,7 +70,7 @@ function setup() {
   angle = random(TWO_PI);
 
 
-  loadParse();
+  loadParse(createNames);
 
 }
 
@@ -182,6 +182,13 @@ function createNames() {
       names[i] = String(i+1);
     }
   }
+
+  createDivs();
+}
+
+
+
+function createDivs() {
 
 
   total = names.length;
