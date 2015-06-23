@@ -6,14 +6,8 @@ var divs;
 
 var selected;
 
-
-
 // Canvas for wheel
 var canvas;
-
-// Stuff for name input
-var inputA;
-var input;
 
 // Size of circle
 var w;
@@ -63,25 +57,6 @@ function setup() {
   removeButton.class('button');
   removeButton.mousePressed(removeName);
   removeButton.position(20, windowHeight - 80)
-
-  saveNames = createButton('save configuration');
-  saveNames.class('button');
-  saveNames.position(20, windowHeight-110);
-  saveNames.mousePressed(function() {
-    sendToParse();
-  });
-
-
-  // // Name input
-  // inputA = createA("#","Enter names");
-  // inputA.position(20,10);
-  // inputA.style("color","#FFFFFF");
-  // inputA.mousePressed(inputClick);
-  // input = createElement("textArea","1 per line\n2\n3\n4\n");
-  // input.position(8,10);
-  // input.attribute("rows",20);
-  // input.hide();
-
 
   // Make a silly github thing
   var github = createA('https://github.com/shiffman/randomizer','');
@@ -238,33 +213,6 @@ function createNames() {
   }
 }
 
-// Input link was clicked
-// function inputClick() {
-//   if (state === 0) {
-//     input.show();
-//     inputA.html("Submit names")
-//     inputA.position(10,280);
-//     state = 1;
-//   } else if (state === 1) {
-//     var data = input.value();
-//     names = data.split('\n');
-
-//     // If blank
-//     for (var i = names.length-1; i >= 0; i--) {
-//       names[i] = names[i].trim();
-//       if (names[i].length === 0) {
-//         names.splice(i,1);
-//       }
-//     }
-
-//     createNames();
-//     state = 0;
-//     inputA.html("Enter names");
-//     inputA.position(10,10);
-//     input.hide();
-//     spinning = false;
-//   }
-// }
 
 function mouseReleased() {
   if (mouseVec.mag() < w/2) {

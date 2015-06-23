@@ -10,7 +10,7 @@ function sendToParse(names, elt) {
     id = result.id;
     console.log(data);
     //var url = 'http://shiffman.net/randomizer/?id='+id;
-    var url = 'http://localhost:8001/?id='+id;
+    var url = 'http://localhost:8001/spin.html?id='+id;
     elt.html('<a href="' + url +'">' + url +'</a>');
   });
 }
