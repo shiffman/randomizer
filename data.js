@@ -9,8 +9,8 @@ function sendToParse(names, elt) {
   config.save(data).then(function(result) {
     id = result.id;
     console.log(data);
-    //var url = 'http://shiffman.net/randomizer/?id='+id;
-    var url = 'http://localhost:8001/spin.html?id='+id;
+    var url = 'http://shiffman.net/randomizer/spin.html?id='+id;
+    //var url = 'http://localhost:8001/spin.html?id='+id;
     elt.html('<a href="' + url +'">' + url +'</a>');
   });
 }
