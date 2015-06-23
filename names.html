@@ -1,0 +1,50 @@
+<html>
+
+  <head>
+  
+  <script language="javascript" type="text/javascript" src="lib/p5.js"></script>
+  <script language="javascript" type="text/javascript" src="lib/p5.dom.js"></script>
+  <script language="javascript" type="text/javascript" src="data.js"></script>
+  <script language="javascript" type="text/javascript">
+
+  function setup() {
+    noCanvas();
+    Parse.initialize("AT3yu7k46UyerBgi8vt1KB9WEGP4kV9YCOKD8zMK", "6OOxWTjbLNBvdEL7tftynyXlZmHjok04MsozzZ0m");
+
+    var input = getElement('names');
+    var submit = getElement('submit');
+    var result = getElement('result');
+
+    submit.mousePressed(function() {
+      var data = input.value();
+      names = data.split('\n');
+      // If blank
+      for (var i = names.length-1; i >= 0; i--) {
+        names[i] = names[i].trim();
+        if (names[i].length === 0) {
+          names.splice(i,1);
+        }
+      }
+
+      sendToParse(names, result);
+    });
+
+
+
+  }
+
+
+  </script>
+  <script src="//www.parsecdn.com/js/parse-1.4.2.min.js"></script>
+  
+  <style>
+
+  </style>
+
+</head>
+  <body>
+  <p><textarea cols=50 rows=20 id="names">enter names here, one per line</textarea></p>
+  <a href="#" id="submit">submit</a>
+  <p id="result"></p>
+  </body>
+</html>

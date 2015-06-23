@@ -43,6 +43,9 @@ var removeButton;
 
 function setup() {
 
+  Parse.initialize("AT3yu7k46UyerBgi8vt1KB9WEGP4kV9YCOKD8zMK", "6OOxWTjbLNBvdEL7tftynyXlZmHjok04MsozzZ0m");
+
+
   // Make the canvas full screen size
   canvas = createCanvas(windowWidth,windowHeight);
   canvas.position(0,0);
@@ -59,17 +62,25 @@ function setup() {
   removeButton = createButton('remove selected');
   removeButton.class('button');
   removeButton.mousePressed(removeName);
-  removeButton.position(20, windowHeight - 100)
+  removeButton.position(20, windowHeight - 80)
 
-  // Name input
-  inputA = createA("#","Enter names");
-  inputA.position(20,10);
-  inputA.style("color","#FFFFFF");
-  inputA.mousePressed(inputClick);
-  input = createElement("textArea","1 per line\n2\n3\n4\n");
-  input.position(8,10);
-  input.attribute("rows",20);
-  input.hide();
+  saveNames = createButton('save configuration');
+  saveNames.class('button');
+  saveNames.position(20, windowHeight-110);
+  saveNames.mousePressed(function() {
+    sendToParse();
+  });
+
+
+  // // Name input
+  // inputA = createA("#","Enter names");
+  // inputA.position(20,10);
+  // inputA.style("color","#FFFFFF");
+  // inputA.mousePressed(inputClick);
+  // input = createElement("textArea","1 per line\n2\n3\n4\n");
+  // input.position(8,10);
+  // input.attribute("rows",20);
+  // input.hide();
 
 
   // Make a silly github thing
@@ -79,11 +90,13 @@ function setup() {
   github.child('gitimg');
   gitimg.attribute('style','position: absolute; top: 0; right: 0; border: 0;');
 
-  // First pass at names
-  createNames();
 
   // Random start to arrow
   angle = random(TWO_PI);
+
+
+  loadParse();
+
 }
 
 function draw() {
@@ -226,32 +239,32 @@ function createNames() {
 }
 
 // Input link was clicked
-function inputClick() {
-  if (state === 0) {
-    input.show();
-    inputA.html("Submit names")
-    inputA.position(10,280);
-    state = 1;
-  } else if (state === 1) {
-    var data = input.value();
-    names = data.split('\n');
+// function inputClick() {
+//   if (state === 0) {
+//     input.show();
+//     inputA.html("Submit names")
+//     inputA.position(10,280);
+//     state = 1;
+//   } else if (state === 1) {
+//     var data = input.value();
+//     names = data.split('\n');
 
-    // If blank
-    for (var i = names.length-1; i >= 0; i--) {
-      names[i] = names[i].trim();
-      if (names[i].length === 0) {
-        names.splice(i,1);
-      }
-    }
+//     // If blank
+//     for (var i = names.length-1; i >= 0; i--) {
+//       names[i] = names[i].trim();
+//       if (names[i].length === 0) {
+//         names.splice(i,1);
+//       }
+//     }
 
-    createNames();
-    state = 0;
-    inputA.html("Enter names");
-    inputA.position(10,10);
-    input.hide();
-    spinning = false;
-  }
-}
+//     createNames();
+//     state = 0;
+//     inputA.html("Enter names");
+//     inputA.position(10,10);
+//     input.hide();
+//     spinning = false;
+//   }
+// }
 
 function mouseReleased() {
   if (mouseVec.mag() < w/2) {
