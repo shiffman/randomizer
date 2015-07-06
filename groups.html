@@ -52,14 +52,13 @@
       if (namescopy.length > 0) {
         // Hack for one leftover with special case of groups of 7
         if (namescopy.length === 1) {
-          groups[groups.length-1].push(namescopy[0]);
+          groups[0].push(namescopy[0]);
         } else {
           groups.push(namescopy);
         }
       }
 
       buildTable(groups);
-      console.log(groups);
     });
 
   }
