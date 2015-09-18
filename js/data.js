@@ -9,10 +9,10 @@ function sendToParse(names, elt) {
   config.save(data).then(function(result) {
     id = result.id;
     console.log(data);
-    var url1 = 'http://shiffman.net/randomizer/groups.html?id='+id;
-    var url2 = 'http://shiffman.net/randomizer/spin.html?id='+id;
+    var url1 = 'groups/?id='+id;
+    var url2 = 'spin/?id='+id;
     //var url = 'http://localhost:8001/spin.html?id='+id;
-    elt.html('<a href="' + url1 +'">' + url1 +'</a><br />' + '<a href="' + url2 +'">' + url2 +'</a><br />');
+    elt.html('<a href="' + url2 +'">spin</a><br />' + '<a href="' + url1 +'">groups</a><br />');
   });
 }
 

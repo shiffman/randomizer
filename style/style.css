@@ -9,3 +9,11 @@ td, th {
 table {
   border-collapse: collapse;
 }
+
+body {
+  padding: 24px;
+}
+
+#result {
+  margin-top: 12px;
+}
