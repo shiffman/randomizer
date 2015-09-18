@@ -20,7 +20,6 @@ function sendToParse(names, elt) {
 var names;
 
 
-
 function loadParse(todo) {
   var params = getURLParams();
   var NameList = Parse.Object.extend("NameList");
