@@ -81,6 +81,8 @@
       if (howmany < 100) {
         setTimeout(shuffler, timing);
       } 
+      var countdown = floor((100-howmany)/10);
+      select('#timer').html(countdown+1);
 
     }
 
@@ -161,6 +163,8 @@
   <p>You can work anywhere on the floor you like.  These assignments are to help you spread out.  You should be in your room at 1pm for the "show and tell" hour.</p>
 
   <div id="names"></div>
+
+  <h1 id = "timer">10</h1>
 
   <!--<p>
     Number in each group: 
