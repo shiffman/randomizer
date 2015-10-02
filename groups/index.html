@@ -1,10 +1,10 @@
 <head>
   <!--<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'> -->
-  <script language="javascript" type="text/javascript" src="lib/p5.js"></script>
-  <script language="javascript" type="text/javascript" src="lib/p5.dom.js"></script>
+  <script language="javascript" type="text/javascript" src="../lib/p5.js"></script>
+  <script language="javascript" type="text/javascript" src="../lib/p5.dom.js"></script>
   <script src="//www.parsecdn.com/js/parse-1.4.2.min.js"></script>
-  <script language="javascript" type="text/javascript" src="js/data.js"></script>
-  <link rel="stylesheet" href="style/style.css">
+  <script language="javascript" type="text/javascript" src="../js/data.js"></script>
+  <link rel="stylesheet" href="../style/style.css">
 
   <script>
 
@@ -15,8 +15,8 @@
     }
 
     for (var i = 0; i < names.length; i++) {
-      var n = createDiv(names[i]);
-      n.parent('names');
+      //var n = createDiv(names[i]);
+      //n.parent('names');
     }
   }
 
@@ -27,13 +27,28 @@
 
     loadParse(loaded);
 
+    var params = getURLParams();
+    var seed = Number(params.seed.substring(0,1))
+
+
     //names = ['dan','aliki','elias','olympia','one','two'];
 
 
-    var shuffleButton = getElement('shuffle');
+    var shuffleButton = select('#shuffle');
+
+    var timing = 10;
+    var howmany = 0;
 
     shuffleButton.mousePressed(function() {
-      var num = getElement('num').value();
+      howmany = 0;
+      randomSeed(seed);
+      console.log(seed);
+      shuffler();
+      setTimeout(shuffler,timing);
+    });
+
+    function shuffler() {
+      var num = select('#num').value();
       var total = floor(names.length / num);
 
       namescopy = names.slice();//copy(names);
@@ -57,42 +72,62 @@
           groups.push(namescopy);
         }
       }
-
+      //console.log(groups);
       buildTable(groups);
-    });
+
+      howmany++;
+      if (howmany < 100) {
+        setTimeout(shuffler, timing);
+      } 
+
+    }
 
   }
 
 
   function buildTable(groups) {
 
-    var allcells = getElements('tablecell');
+    var allcells = selectAll('.tablecell');
     for (var i = 0; i < allcells.length; i++) {
       allcells[i].remove();
     }
 
 
+    var rooms = ['lounge', '50', '20', '15', 'AB', 'conference'];
+    var space = [11, 11, 8, 8, 8, 8];
+
+    var room = 0;
+    var count = 0;
+
+    var num = select('#num').value();
+    //console.log(groups.length);
+
     for (var i = 0; i < groups.length; i++) {
-      var th = createElement('th');
-      th.html('Station ' + i);
-      th.class('tablecell')
-      th.parent('groups');
+    
+      // var th = createElement('th');
+      // th.html(i);
+      // th.class('tablecell')
+      // th.parent(rooms[i]);
+
+      var tr = createElement('tr');
+      tr.id('row'+i);
+      tr.class('tablecell');
+      var where = rooms[room]+'body';
+      //console.log(where);
+      tr.parent(where);
 
       for (var j = 0; j < groups[i].length; j++) {
-        if (i === 0) {
-          var tr = createElement('tr');
-          tr.id('row'+j);
-          tr.class('tablecell');
-          tr.parent('tbody');
-        }
-
         var td = createElement('td');
         td.html(groups[i][j]);
-        td.class('tablecell');    
-        td.parent('row'+j);
-
-      
+        td.class('tablecell');
+        td.style('width', '300px')  
+        td.parent('row'+i);
       }
+      count++;
+      if (count > space[room]) {
+        room++;
+        count = 0;
+      }   
 
     }
   }
@@ -126,31 +161,86 @@
   <p>
     Number in each group: 
     <select id="num">
-      <option value="2">2</option>
+      <option selected value="2">2</option>
       <option value="3">3</option>
       <option value="4">4</option>
       <option value="5">5</option>
       <option value="6">6</option>
-      <option selected value="7">7</option>
+      <option value="7">7</option>
     </select>
   </p>
 
-  <p>Members can't repeat stations: <input type = "checkbox"></input></p>
 
   <p><button id = "shuffle">shuffle</button></p>
 
+
+  <h2>Lounge</h2>
+
   <table>
     <thead>
-      <tr id="groups">
+      <tr id="lounge">
       </tr>
     </thead>
-    <tbody id='tbody'>
+    <tbody id='loungebody'>
     </tbody>
   </table>
 
+  <h2>Room 50</h2>
 
+  <table>
+    <thead>
+      <tr id="50">
+      </tr>
+    </thead>
+    <tbody id='50body'>
+    </tbody>
+  </table>
 
+  <h2>Room 20</h2>
 
+  <p>Note room 20 is not available until 12pm, work in the lounge until then, thanks!</p>
+
+  <table>
+    <thead>
+      <tr id="20">
+      </tr>
+    </thead>
+    <tbody id='20body'>
+    </tbody>
+  </table>
+
+  <h2>Room 15</h2>
+
+  <table>
+    <thead>
+      <tr id="15">
+      </tr>
+    </thead>
+    <tbody id='15body'>
+    </tbody>
+  </table>
+
+  <h2>Room AB</h2>
+
+  <table>
+    <thead>
+      <tr id="AB">
+      </tr>
+    </thead>
+    <tbody id='ABbody'>
+    </tbody>
+  </table>
+
+  <h2>Conference Room</h2>
+
+  <table>
+    <thead>
+      <tr id="conference">
+      </tr>
+    </thead>
+    <tbody id='conferencebody'>
+    </tbody>
+  </table>
 
 
 </body>

@@ -37,7 +37,7 @@ function loadParse(todo) {
     query.get(id, {
       success: function(config) {
         names = config._serverData.names;
-        console.log(names);
+        //console.log(names);
         todo();
       },
       error: function(object, error) {
