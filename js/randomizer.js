@@ -253,14 +253,13 @@ function spin(force) {
 }
 
 function loadColors() {
-  // sometimes the blues are very similar (ex. total === 11)
   // TODO: set better colors with RGB
   var rainbowColors = [
     createVector(0, 0, 0).set(color('red').rgba),
     createVector(0, 0, 0).set(color('orange').rgba),
     createVector(0, 0, 0).set(color('yellow').rgba),
     createVector(0, 0, 0).set(color('green').rgba),
-    createVector(0, 0, 0).set(color('blue').rgba),
+    createVector(38, 58, 150), // blue
     createVector(0, 0, 0).set(color('indigo').rgba),
     createVector(0, 0, 0).set(color('violet').rgba)
   ];
