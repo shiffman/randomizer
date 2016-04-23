@@ -35,6 +35,9 @@ var pmouseVec;
 
 var removeButton;
 
+// Sets an array of colors
+var palette = ["#1abc9c","#2ecc71","#3498db","#9b59b6","#f1c40f","#e67e22","#e74c3c","#34495e","#95a5a6"];
+
 function setup() {
 
   Parse.initialize("AT3yu7k46UyerBgi8vt1KB9WEGP4kV9YCOKD8zMK", "6OOxWTjbLNBvdEL7tftynyXlZmHjok04MsozzZ0m");
@@ -102,9 +105,9 @@ function draw() {
   // For every slice
   for (var i = 0; i < total; i++) {
     push();
-    // ALternate fill color
-    if (i % 2 == 0) fill(175);
-    else fill(75);
+  // Choose a color for the slice from the palette array
+  var col = palette[i % palette.length];
+  fill(col);
 
     // Where is the arrow?
     var testAngle = angle-sz/2;
@@ -117,7 +120,7 @@ function draw() {
     // Is it inside the slice?
     if (((testAngle >= begin*sz && testAngle < end*sz) || (testAngle < 0 && i == total-1))) {
       selected = which;
-      divs[which].style("background-color","#FFFFFF");
+      divs[which].style("background-color",col);
       divs[which].style("color","#000000");
     } else {
       divs[which].style("background-color","#000000");
