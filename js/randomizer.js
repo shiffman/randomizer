@@ -266,7 +266,7 @@ function loadColors() {
   ];
 
   for (var i = 0; i < total; i++) {
-    var colorPosition = (i / total) % (rainbowColors.length - 1);
+    var colorPosition = i / total;
     var scaledColorPosition = colorPosition * (rainbowColors.length - 1);
 
     var colorIndex = Math.floor(scaledColorPosition);
