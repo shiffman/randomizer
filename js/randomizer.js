@@ -35,6 +35,8 @@ var pmouseVec;
 
 var removeButton;
 
+var nameColors = [];
+
 function setup() {
 
   Parse.initialize("AT3yu7k46UyerBgi8vt1KB9WEGP4kV9YCOKD8zMK", "6OOxWTjbLNBvdEL7tftynyXlZmHjok04MsozzZ0m");
@@ -71,11 +73,9 @@ function setup() {
 
 
   loadParse(createNames);
-
 }
 
 function draw() {
-  
   // A user spin
   if (mouseIsPressed) {
     if (!mouseVec) {
@@ -103,14 +103,13 @@ function draw() {
   for (var i = 0; i < total; i++) {
     push();
     // ALternate fill color
-    if (i % 2 == 0) fill(175);
-    else fill(75);
+    fill(nameColors[i]);
 
     // Where is the arrow?
     var testAngle = angle-sz/2;
     var begin = (i);
     var end = (i+1);
-    
+
     // Which slice
     var which = (i+1)%total;
 
@@ -123,14 +122,14 @@ function draw() {
       divs[which].style("background-color","#000000");
       divs[(i+1) % total].style("color","#FFFFFF");
     }
-    
+
     // Draw slice
     rotate(sz*i+sz/2);
     noStroke();
     arc(0, 0, w, w, 0, sz);
     pop();
   }
-  
+
   // This is just some lines to separate the slices
   for (var i = 0; i < total; i++) {
     push();
@@ -140,7 +139,7 @@ function draw() {
     line(0, 0, w/2, 0);
     pop();
   }
-  
+
 
   // The spinner
   rotate(angle);
@@ -150,7 +149,7 @@ function draw() {
   strokeWeight(8);
   stroke(255);
   line(-spinnerRad, 0, spinnerRad, 0);
-  
+
   fill(255);
   // Arbitrary way to draw arrow
   triangle(spinnerRad, 0, spinnerRad - 24, -12, spinnerRad - 24, 12);
@@ -193,7 +192,7 @@ function createDivs() {
 
   total = names.length;
   sz = TWO_PI / total;   // Size of each slice
-   
+
   // Clear existing divs
   if (divs) {
     for (var i = 0; i < divs.length; i++) {
@@ -201,7 +200,7 @@ function createDivs() {
     }
   }
 
-  
+
   // Make new divs
   divs = [];
   var theta = 0;
@@ -218,8 +217,9 @@ function createDivs() {
     divs[i].position(x,y);
     theta += sz;
   }
-}
 
+  loadColors();
+}
 
 function mouseReleased() {
   if (mouseVec.mag() < w/2) {
@@ -250,4 +250,41 @@ function spinit() {
 function spin(force) {
   dangle = force;
   spinning = true;
+}
+
+function loadColors() {
+  // TODO: set better colors with RGB
+  var rainbowColors = [
+    createVector(0, 0, 0).set(color('red').rgba),
+    createVector(0, 0, 0).set(color('orange').rgba),
+    createVector(0, 0, 0).set(color('yellow').rgba),
+    createVector(0, 0, 0).set(color('green').rgba),
+    createVector(38, 58, 150), // blue
+    createVector(0, 0, 0).set(color('indigo').rgba),
+    createVector(0, 0, 0).set(color('violet').rgba)
+  ];
+
+  for (var i = 0; i < total; i++) {
+    var colorPosition = i / total;
+    var scaledColorPosition = colorPosition * (rainbowColors.length - 1);
+
+    var colorIndex = Math.floor(scaledColorPosition);
+    var colorPercentage = scaledColorPosition - colorIndex;
+
+    var nameColor = getColorByPercentage(rainbowColors[colorIndex],
+                                         rainbowColors[colorIndex + 1],
+                                         colorPercentage);
+
+    nameColors.push(color(nameColor.x, nameColor.y, nameColor.z))
+  }
+}
+
+function getColorByPercentage(firstColor, secondColor, percentage) {
+  // assumes colors are p5js vectors
+  var firstColorCopy = firstColor.copy();
+  var secondColorCopy = secondColor.copy();
+
+  var deltaColor = secondColorCopy.sub(firstColorCopy);
+  var scaledDeltaColor = deltaColor.mult(percentage);
+  return firstColorCopy.add(scaledDeltaColor);
 }
