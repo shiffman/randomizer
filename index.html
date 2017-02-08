@@ -13,7 +13,9 @@
 
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  
+
+  <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
+
   <script language="javascript" type="text/javascript" src="lib/p5.js"></script>
   <script language="javascript" type="text/javascript" src="lib/p5.dom.js"></script>
   <script language="javascript" type="text/javascript" src="js/data.js"></script>
@@ -21,7 +23,15 @@
 
   function setup() {
     noCanvas();
-    Parse.initialize("AT3yu7k46UyerBgi8vt1KB9WEGP4kV9YCOKD8zMK", "6OOxWTjbLNBvdEL7tftynyXlZmHjok04MsozzZ0m");
+    var config = {
+      apiKey: "AIzaSyA-VyZJOZVqXZj82wvVMkfJedDEhqXcIh8",
+      authDomain: "a2zitp-6519b.firebaseapp.com",
+      databaseURL: "https://a2zitp-6519b.firebaseio.com",
+      storageBucket: "a2zitp-6519b.appspot.com",
+      messagingSenderId: "363965061200"
+    };
+    firebase.initializeApp(config);
+    database = firebase.database();
 
     var input = select('#names');
     var submit = select('#submit');
@@ -38,13 +48,12 @@
         }
       }
 
-      sendToParse(names, result);
+      sendToFirebase(names, result);
     });
   }
 
   </script>
-  <script src="//www.parsecdn.com/js/parse-1.4.2.min.js"></script>
-  
+
   <style>
 
   </style>

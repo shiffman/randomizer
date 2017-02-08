@@ -36,10 +36,19 @@ var pmouseVec;
 var removeButton;
 
 var nameColors = [];
+var database;
 
 function setup() {
 
-  Parse.initialize("AT3yu7k46UyerBgi8vt1KB9WEGP4kV9YCOKD8zMK", "6OOxWTjbLNBvdEL7tftynyXlZmHjok04MsozzZ0m");
+  var config = {
+    apiKey: "AIzaSyA-VyZJOZVqXZj82wvVMkfJedDEhqXcIh8",
+    authDomain: "a2zitp-6519b.firebaseapp.com",
+    databaseURL: "https://a2zitp-6519b.firebaseio.com",
+    storageBucket: "a2zitp-6519b.appspot.com",
+    messagingSenderId: "363965061200"
+  };
+  firebase.initializeApp(config);
+  database = firebase.database();
 
 
   // Make the canvas full screen size
@@ -72,7 +81,7 @@ function setup() {
   angle = random(TWO_PI);
 
 
-  loadParse(createNames);
+  loadFirebase(createNames);
 }
 
 function draw() {
