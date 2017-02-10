@@ -1,17 +1,22 @@
-td, th { 
-  padding: 4pt 6pt 2pt;
-  vertical-align: top;
-  text-align: left;
-  border: 1px solid #AAAAAA;
-  width: 25%;
-}
-
-table {
-  border-collapse: collapse;
-}
-
 body {
-  padding: 24px;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial;
+  text-align: center;
+}
+
+textarea {
+  margin-top: 1em;
+    resize: none;
+}
+
+.card {
+  background: #fff;
+  border-radius: 2px;
+  display: inline-block;
+  margin: 4em;
+  position: relative;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  padding: 1em;
+  text-align: center;
 }
 
 #result {

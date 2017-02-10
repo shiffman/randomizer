@@ -2,67 +2,32 @@
 
   <head>
 
+    <title>Class Randomizer</title>
 
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css" />
 
-  <link rel="stylesheet" href="style/style.css">
+    <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
 
-  <!-- Optional theme -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link href="//cdn.muicss.com/mui-0.9.9-rc2/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <script language="javascript" type="text/javascript" src="//cdn.muicss.com/mui-0.9.9-rc2/js/mui.min.js"></script>
 
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style/style.css">
 
-  <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
+    <script language="javascript" type="text/javascript" src="js/inputPage.js"></script>
 
-  <script language="javascript" type="text/javascript" src="lib/p5.js"></script>
-  <script language="javascript" type="text/javascript" src="lib/p5.dom.js"></script>
-  <script language="javascript" type="text/javascript" src="js/data.js"></script>
-  <script language="javascript" type="text/javascript">
+    <script language="javascript" type="text/javascript" src="lib/p5.js"></script>
+    <script language="javascript" type="text/javascript" src="lib/p5.dom.js"></script>
+    <script language="javascript" type="text/javascript" src="js/data.js"></script>
 
-  function setup() {
-    noCanvas();
-    var config = {
-      apiKey: "AIzaSyA-VyZJOZVqXZj82wvVMkfJedDEhqXcIh8",
-      authDomain: "a2zitp-6519b.firebaseapp.com",
-      databaseURL: "https://a2zitp-6519b.firebaseio.com",
-      storageBucket: "a2zitp-6519b.appspot.com",
-      messagingSenderId: "363965061200"
-    };
-    firebase.initializeApp(config);
-    database = firebase.database();
+  </head>
 
-    var input = select('#names');
-    var submit = select('#submit');
-    var result = select('#result');
-
-    submit.mousePressed(function() {
-      var data = input.value();
-      names = data.split('\n');
-      // If blank
-      for (var i = names.length-1; i >= 0; i--) {
-        names[i] = names[i].trim();
-        if (names[i].length === 0) {
-          names.splice(i,1);
-        }
-      }
-
-      sendToFirebase(names, result);
-    });
-  }
-
-  </script>
-
-  <style>
-
-  </style>
-
-</head>
   <body>
-  <h1>Class Randomizer</h1>
-  <p><textarea cols=50 rows=20 id="names">enter names here, one per line</textarea></p>
-  <a href="#" id="submit">submit</a>
-  <p id="result"></p>
+    <div class="card">
+      <h1>Class Randomizer</h1>
+      <div class="mui-textfield"><textarea cols=50 rows=20 id="names" placeholder="Enter names here, one per line."></textarea></div>
+      <button href="#" id="submit" class="mui-btn mui-btn--raised mui-btn--primary">submit</button>
+      <p id="result"></p>
+    </div>
   </body>
+
 </html>
