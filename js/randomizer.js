@@ -110,13 +110,11 @@ function draw() {
 
   // For every slice
   for (var i = 0; i < total; i++) {
-    push();
-    // ALternate fill color
-    
-
+    push(); 
     // Where is the arrow?
     var testAngle = angle - sz / 2;
-    var begin = (i);
+
+	  var begin = (i);
     var end = (i + 1);
 
     // Which slice
@@ -143,6 +141,7 @@ function draw() {
 		fill(nameColors[i].rgba[0], nameColors[i].rgba[1], nameColors[i].rgba[2], 190);		
 		arc(0, 0, w+30, w+30, 0, sz); 
 	}else{
+		// Alternate fill color
 		fill(nameColors[i]); 
 		arc(0, 0, w, w, 0, sz); 
 	}
