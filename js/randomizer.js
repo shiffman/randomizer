@@ -110,46 +110,60 @@ function draw() {
 
   // For every slice
   for (var i = 0; i < total; i++) {
-    push();
-    // ALternate fill color
-    fill(nameColors[i]);
-
+    push(); 
     // Where is the arrow?
     var testAngle = angle - sz / 2;
-    var begin = (i);
+
+	  var begin = (i);
     var end = (i + 1);
 
     // Which slice
     var which = (i + 1) % total;
+	var insideSlice = false;
 
     // Is it inside the slice?
     if (((testAngle >= begin * sz && testAngle < end * sz) || (testAngle < 0 && i == total - 1))) {
       selected = which;
       divs[which].style("background-color", "#FFFFFF");
       divs[which].style("color", "#000000");
+	  insideSlice = true;
     } else {
       divs[which].style("background-color", "#000000");
-      divs[(i + 1) % total].style("color", "#FFFFFF");
+      divs[(i + 1) % total].style("color", "#FFFFFF");	  
     }
 
     // Draw slice
     rotate(sz * i + sz / 2);
     noStroke();
-    arc(0, 0, w, w, 0, sz);
+	
+	//Change the color and the size of the slice that the pointer is inside
+	if(insideSlice){
+		fill(nameColors[i].rgba[0], nameColors[i].rgba[1], nameColors[i].rgba[2], 190);		
+		arc(0, 0, w+30, w+30, 0, sz); 
+	}else{
+		// Alternate fill color
+		fill(nameColors[i]); 
+		arc(0, 0, w, w, 0, sz); 
+	}
+    
     pop();
-  }
-
-  // This is just some lines to separate the slices
-  for (var i = 0; i < total; i++) {
+	
+	// This is just some lines to separate the slices
     push();
-    strokeWeight(2);
-    stroke(255, 100);
-    rotate(sz * i + sz / 2);
-    line(0, 0, w / 2, 0);
+		//Change the border color of the slide that the poiner is inside
+		//to achive the illusion that the slice is pulled up
+		if(!insideSlice){
+			stroke(255, 100);
+			strokeWeight(2); 
+		}else{
+			stroke(51);
+			strokeWeight(2.5); 
+		}
+		rotate(sz * i + sz / 2);
+		line(0, 0, w / 2, 0);
     pop();
-  }
-
-
+  } 
+  
   // The spinner
   rotate(angle);
   // Length
