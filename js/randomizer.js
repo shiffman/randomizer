@@ -37,6 +37,11 @@ var removeButton;
 var nameColors = [];
 var database;
 
+//The two following variables are used for the smooth 
+//background color change
+var previousColor;
+var currentColor;
+
 function setup() {
 
   var config = {
@@ -99,12 +104,23 @@ function draw() {
   }
 
 
-  // clear background
-  clear();
+  //Ensure that we have atleast a color
+  if(!previousColor){
+    if(nameColors[0]){
+      previousColor = color(nameColors[0].rgba[0], nameColors[0].rgba[1], nameColors[0].rgba[2]);
+      currentColor = previousColor;
+    }
+  }
+   
+  // lerp between the current and the previous color and clear background
+  if(previousColor){
+      currentColor = lerpColor(currentColor, previousColor, 0.04);
+      background(currentColor);
+    }
   strokeWeight(8);
   stroke(255);
   fill(190);
-  translate(width / 2, height / 2);
+  translate(width / 2, height / 2); 
   ellipse(0, 0, w, w);
 
   // For every slice
@@ -138,7 +154,8 @@ function draw() {
     //Change the color and the size of the slice that the pointer is inside
     if (insideSlice) {
       fill(nameColors[i].rgba[0], nameColors[i].rgba[1], nameColors[i].rgba[2], 190);
-      arc(0, 0, w + 30, w + 30, 0, sz);
+      arc(0, 0, w + 30, w + 30, 0, sz); 
+      previousColor = color(nameColors[i].rgba[0], nameColors[i].rgba[1], nameColors[i].rgba[2]);
     } else {
       // Alternate fill color
       fill(nameColors[i]);
@@ -178,6 +195,7 @@ function draw() {
   // Back of spinner
   rect(-spinnerRad, -6, 12, 12);
   // Center of spinner
+  fill(0);
   ellipse(0, 0, 12, 12);
 
   // Spin
