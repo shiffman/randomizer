@@ -1,4 +1,3 @@
-
 // The names
 var names = [];
 // Divs to hold names
@@ -37,6 +36,11 @@ var removeButton;
 
 var nameColors = [];
 var database;
+
+//The two following variables are used for the smooth 
+//background color change
+var previousColor;
+var currentColor;
 
 function setup() {
 
@@ -100,70 +104,82 @@ function draw() {
   }
 
 
-  // clear background
-  clear();
+  //Ensure that we have atleast the a color
+  if(!previousColor){
+    if(nameColors[0]){
+      previousColor = color(nameColors[0].rgba[0], nameColors[0].rgba[1], nameColors[0].rgba[2]);
+      currentColor = previousColor;
+    }
+  }
+   
+  // lerp between the current and the previous color and clear background
+  if(previousColor){
+      currentColor = lerpColor(currentColor, previousColor, 0.04);
+      background(currentColor);
+    }
   strokeWeight(8);
   stroke(255);
   fill(190);
-  translate(width / 2, height / 2);
+  translate(width / 2, height / 2); 
   ellipse(0, 0, w, w);
 
   // For every slice
   for (var i = 0; i < total; i++) {
-    push(); 
+    push();
     // Where is the arrow?
     var testAngle = angle - sz / 2;
 
-	  var begin = (i);
+    var begin = (i);
     var end = (i + 1);
 
     // Which slice
     var which = (i + 1) % total;
-	var insideSlice = false;
+    var insideSlice = false;
 
     // Is it inside the slice?
     if (((testAngle >= begin * sz && testAngle < end * sz) || (testAngle < 0 && i == total - 1))) {
       selected = which;
       divs[which].style("background-color", "#FFFFFF");
       divs[which].style("color", "#000000");
-	  insideSlice = true;
+      insideSlice = true;
     } else {
       divs[which].style("background-color", "#000000");
-      divs[(i + 1) % total].style("color", "#FFFFFF");	  
+      divs[(i + 1) % total].style("color", "#FFFFFF");
     }
 
     // Draw slice
     rotate(sz * i + sz / 2);
     noStroke();
-	
-	//Change the color and the size of the slice that the pointer is inside
-	if(insideSlice){
-		fill(nameColors[i].rgba[0], nameColors[i].rgba[1], nameColors[i].rgba[2], 190);		
-		arc(0, 0, w+30, w+30, 0, sz); 
-	}else{
-		// Alternate fill color
-		fill(nameColors[i]); 
-		arc(0, 0, w, w, 0, sz); 
-	}
-    
+
+    //Change the color and the size of the slice that the pointer is inside
+    if (insideSlice) {
+      fill(nameColors[i].rgba[0], nameColors[i].rgba[1], nameColors[i].rgba[2], 190);
+      arc(0, 0, w + 30, w + 30, 0, sz); 
+      previousColor = color(nameColors[i].rgba[0], nameColors[i].rgba[1], nameColors[i].rgba[2]);
+    } else {
+      // Alternate fill color
+      fill(nameColors[i]);
+      arc(0, 0, w, w, 0, sz);
+    }
+
     pop();
-	
-	// This is just some lines to separate the slices
+
+    // This is just some lines to separate the slices
     push();
-		//Change the border color of the slide that the poiner is inside
-		//to achive the illusion that the slice is pulled up
-		if(!insideSlice){
-			stroke(255, 100);
-			strokeWeight(2); 
-		}else{
-			stroke(51);
-			strokeWeight(2.5); 
-		}
-		rotate(sz * i + sz / 2);
-		line(0, 0, w / 2, 0);
+    //Change the border color of the slide that the poiner is inside
+    //to achive the illusion that the slice is pulled up
+    if (!insideSlice) {
+      stroke(255, 100);
+      strokeWeight(2);
+    } else {
+      stroke(51);
+      strokeWeight(2.5);
+    }
+    rotate(sz * i + sz / 2);
+    line(0, 0, w / 2, 0);
     pop();
-  } 
-  
+  }
+
   // The spinner
   rotate(angle);
   // Length
@@ -179,6 +195,7 @@ function draw() {
   // Back of spinner
   rect(-spinnerRad, -6, 12, 12);
   // Center of spinner
+  fill(0);
   ellipse(0, 0, 12, 12);
 
   // Spin
@@ -214,7 +231,7 @@ function createDivs() {
 
 
   total = names.length;
-  sz = TWO_PI / total;   // Size of each slice
+  sz = TWO_PI / total; // Size of each slice
 
   // Clear existing divs
   if (divs) {
