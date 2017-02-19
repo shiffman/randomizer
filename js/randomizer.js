@@ -227,9 +227,25 @@ function createDivs() {
   divs = [];
   var theta = 0;
   for (var i = 0; i < names.length; i++) {
-    divs[i] = createDiv(names[i]);
-    divs[i].style("color", "#FFFFFF");
-    divs[i].style("padding", "10px");
+    var thePadding;
+
+    if(isImageURL(names[i]))
+    {
+      // Image
+      divs[i] = createDiv('<img src="' + names[i] + '" style="width: 100%;">');
+      divs[i].style("width", "100px");
+      divs[i].style("height", "100px");
+      thePadding = '2px';
+    }
+    else 
+    {
+      // Text
+      divs[i] = createDiv(names[i]);
+      divs[i].style("color", "#FFFFFF");
+      thePadding = '10px';
+    }
+
+    divs[i].style("padding", thePadding);
     divs[i].style("display", "inline-block");
     var cx = windowWidth / 2;
     var cy = windowHeight / 2;
@@ -315,4 +331,10 @@ function getColorByPercentage(firstColor, secondColor, percentage) {
   var deltaColor = secondColorCopy.sub(firstColorCopy);
   var scaledDeltaColor = deltaColor.mult(percentage);
   return firstColorCopy.add(scaledDeltaColor);
+}
+
+function isImageURL(url)
+{
+  if(url.endsWith(".png") || url.endsWith(".jpg") || url.endsWith(".gif") || url.endsWith(".jpeg")) return true;
+  else return false;
 }
