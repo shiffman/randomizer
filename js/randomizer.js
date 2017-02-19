@@ -104,7 +104,7 @@ function draw() {
   }
 
 
-  //Ensure that we have atleast a color
+  //Ensure that we have atleast the a color
   if(!previousColor){
     if(nameColors[0]){
       previousColor = color(nameColors[0].rgba[0], nameColors[0].rgba[1], nameColors[0].rgba[2]);
@@ -112,7 +112,7 @@ function draw() {
     }
   }
    
-  // lerp between the current and the previous color and clear the background
+  // lerp between the current and the previous color and clear background
   if(previousColor){
       currentColor = lerpColor(currentColor, previousColor, 0.04);
       background(currentColor);
