@@ -228,8 +228,6 @@ function createNames() {
 
 
 function createDivs() {
-
-
   total = names.length;
   sz = TWO_PI / total; // Size of each slice
 
