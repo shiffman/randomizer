@@ -1,8 +1,8 @@
 function Food(i){
 	this.index = i;
 	this.picked = false;
-	this.color = color(random(255), random(150, 255), random(255), 150);
-	this.energy = random(2, 40); 
+	this.color = color(random(255), random(150, 255), random(255), 190);
+	this.energy = random(2, 40);
 	this.pos = createVector(random(width - this.energy), random(height - this.energy));
 
 	this.show = function(){
