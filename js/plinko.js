@@ -39,7 +39,7 @@ function setup() {
     github.child('gitimg');
     gitimg.attribute('style', 'position: absolute; top: 0; right: 0; border: 0;');
     // button for removing winner and restarting
-    removeNameBtn = createButton("Remove Winner & Restart");
+    removeNameBtn = createButton("Remove & Restart");
     removeNameBtn.class('button');
     removeNameBtn.position(20, windowHeight - 40);
     removeNameBtn.mousePressed(removeName);
