@@ -1,33 +1,51 @@
+<!DOCTYPE html>
 <html>
-
   <head>
-
+    <meta charset="utf-8">
     <title>Class Randomizer</title>
 
-    <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css" />
+    <!-- Fonts -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700"/>
 
-    <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
+    <!-- MUI -->
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/muicss/0.9.26/css/mui.min.css"/>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/muicss/0.9.26/js/mui.min.js"></script>
 
-    <link href="//cdn.muicss.com/mui-0.9.9-rc2/css/mui.min.css" rel="stylesheet" type="text/css" />
-    <script language="javascript" type="text/javascript" src="//cdn.muicss.com/mui-0.9.9-rc2/js/mui.min.js"></script>
+    <!-- Style Sheets -->
+    <link rel="stylesheet" type="text/css" href="style/style.css"/>
 
-    <link rel="stylesheet" href="style/style.css">
+    <!-- Libraries -->
+    <script src="//www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/addons/p5.dom.js"></script>
 
+    <!-- Sketches -->
     <script language="javascript" type="text/javascript" src="js/inputPage.js"></script>
-
-    <script language="javascript" type="text/javascript" src="lib/p5.js"></script>
-    <script language="javascript" type="text/javascript" src="lib/p5.dom.js"></script>
     <script language="javascript" type="text/javascript" src="js/data.js"></script>
-
   </head>
 
   <body>
-    <div class="card">
-      <h1>Class Randomizer</h1>
-      <div class="mui-textfield"><textarea cols=50 rows=20 id="names" placeholder="Enter names here, one per line."></textarea></div>
-      <button href="#" id="submit" class="mui-btn mui-btn--raised mui-btn--primary">submit</button>
-      <p id="result"></p>
+    <header id="header">
+      <div class="mui-appbar mui--z2">
+        <div class="mui-container">
+          <table width="100%">
+            <tr class="mui--appbar-height mui--text-center">
+              <td class="mui--text-title">Class Randomizer</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </header>
+    <div class="mui-container-fluid">
+      <div class="mui-row">
+        <div class="mui-col-sm-10 mui-col-sm-offset-1">
+          <div class="space-top"></div>
+          <div class="mui-panel f-panel" style="margin: 1em">
+            <div class="mui-textfield"><textarea cols=50 rows=22 id="names" placeholder="Enter names here, one per line."></textarea></div>
+            <button href="#" id="submit" class="mui-btn mui-btn--raised mui-btn--primary" style="width:100%">submit</button>
+            <p id="result" class="mui--text-center" style="margin-top: 12px"></p>
+          </div>
+      </div>
     </div>
   </body>
-
 </html>
