@@ -35,26 +35,13 @@ var pmouseVec;
 var removeButton;
 
 var nameColors = [];
-var database;
 
-//The two following variables are used for the smooth 
+//The two following variables are used for the smooth
 //background color change
 var previousColor;
 var currentColor;
 
 function setup() {
-
-  var config = {
-    apiKey: "AIzaSyA-VyZJOZVqXZj82wvVMkfJedDEhqXcIh8",
-    authDomain: "a2zitp-6519b.firebaseapp.com",
-    databaseURL: "https://a2zitp-6519b.firebaseio.com",
-    storageBucket: "a2zitp-6519b.appspot.com",
-    messagingSenderId: "363965061200"
-  };
-  firebase.initializeApp(config);
-  database = firebase.database();
-
-
   // Make the canvas full screen size
   canvas = createCanvas(windowWidth, windowHeight);
   canvas.position(0, 0);
@@ -111,7 +98,7 @@ function draw() {
       currentColor = previousColor;
     }
   }
-   
+
   // lerp between the current and the previous color and clear background
   if(previousColor){
       currentColor = lerpColor(currentColor, previousColor, 0.04);
@@ -120,7 +107,7 @@ function draw() {
   strokeWeight(8);
   stroke(255);
   fill(190);
-  translate(width / 2, height / 2); 
+  translate(width / 2, height / 2);
   ellipse(0, 0, w, w);
 
   // For every slice
@@ -154,7 +141,7 @@ function draw() {
     //Change the color and the size of the slice that the pointer is inside
     if (insideSlice) {
       fill(nameColors[i].rgba[0], nameColors[i].rgba[1], nameColors[i].rgba[2], 190);
-      arc(0, 0, w + 30, w + 30, 0, sz); 
+      arc(0, 0, w + 30, w + 30, 0, sz);
       previousColor = color(nameColors[i].rgba[0], nameColors[i].rgba[1], nameColors[i].rgba[2]);
     } else {
       // Alternate fill color
@@ -253,7 +240,7 @@ function createDivs() {
       divs[i].style("height", "100px");
       thePadding = '2px';
     }
-    else 
+    else
     {
       // Text
       divs[i] = createDiv(names[i]);

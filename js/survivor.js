@@ -32,16 +32,6 @@ function setup() {
   //Load the death sound... (that sounds horrible :c )
   cellDiedSound = loadSound('../assets/cellDeath.mp3');
 
-  var config = {
-    apiKey: "AIzaSyA-VyZJOZVqXZj82wvVMkfJedDEhqXcIh8",
-    authDomain: "a2zitp-6519b.firebaseapp.com",
-    databaseURL: "https://a2zitp-6519b.firebaseio.com",
-    storageBucket: "a2zitp-6519b.appspot.com",
-    messagingSenderId: "363965061200"
-  };
-  firebase.initializeApp(config);
-  database = firebase.database();
-
   // Make the canvas full screen size
   canvas = createCanvas(windowWidth, windowHeight);
   canvas.position(0, 0);

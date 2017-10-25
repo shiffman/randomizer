@@ -1,4 +1,20 @@
+let database = null;
+
+function init() {
+  let config = {
+      apiKey: "AIzaSyA-VyZJOZVqXZj82wvVMkfJedDEhqXcIh8",
+      authDomain: "a2zitp-6519b.firebaseapp.com",
+      databaseURL: "https://a2zitp-6519b.firebaseio.com",
+      storageBucket: "a2zitp-6519b.appspot.com",
+      messagingSenderId: "363965061200"
+  };
+
+  firebase.initializeApp(config);
+  database = firebase.database();
+}
+
 function sendToFirebase(names, elt) {
+  if(database == null) init();
   var namesDB = database.ref('names');
 
   var data = {};
@@ -27,6 +43,7 @@ function sendToFirebase(names, elt) {
 var names;
 
 function loadFirebase(todo) {
+  if(database == null) init();
   var params = getURLParams();
 
 

@@ -19,15 +19,6 @@ var removeNameBtn;
 var hideNames = true;
 function setup() {
     GRAVITY = createVector(0, .5); // init gravity
-    var config = {
-        apiKey: "AIzaSyA-VyZJOZVqXZj82wvVMkfJedDEhqXcIh8"
-        , authDomain: "a2zitp-6519b.firebaseapp.com"
-        , databaseURL: "https://a2zitp-6519b.firebaseio.com"
-        , storageBucket: "a2zitp-6519b.appspot.com"
-        , messagingSenderId: "363965061200"
-    };
-    firebase.initializeApp(config);
-    database = firebase.database();
     // Make the canvas full screen size
     canvas = createCanvas(windowWidth, windowHeight);
     canvas.position(0, 0);
@@ -44,8 +35,8 @@ function setup() {
     removeNameBtn.position(20, windowHeight - 40);
     removeNameBtn.mousePressed(removeName);
     removeNameBtn.hide();
-    
-    
+
+
     Board = new PlinkoBoard(createVector(50, 25), windowWidth - 100, windowHeight - 100);
     loadFirebase(initialize);
     textSize(15);
