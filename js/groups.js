@@ -33,7 +33,7 @@ function setup() {
   //});
 
   function shuffler() {
-    var num = 2;//select('#num').value();
+    var num = 3;//select('#num').value();
     var total = floor(names.length / num);
 
     namescopy = names.slice();//copy(names);
@@ -80,10 +80,7 @@ function buildTable(groups) {
   }
 
 
-  var rooms = ['lounge', '50', '20', '15', 'AB', 'conference'];
-  var space = [10, 10, 7, 7, 7, 7];
 
-  var room = 0;
   var count = 0;
 
   //var num = select('#num').value();
@@ -91,15 +88,10 @@ function buildTable(groups) {
 
   for (var i = 0; i < groups.length; i++) {
 
-    // var th = createElement('th');
-    // th.html(i);
-    // th.class('tablecell')
-    // th.parent(rooms[i]);
-
     var tr = createElement('tr');
     tr.id('row'+i);
     tr.class('tablecell');
-    var where = rooms[room]+'body';
+    var where = 'groupbody';
     //console.log(where);
     tr.parent(where);
 
@@ -109,11 +101,6 @@ function buildTable(groups) {
       td.class('tablecell');
       td.style('width', '300px')
       td.parent('row'+i);
-    }
-    count++;
-    if (count > space[room]) {
-      room++;
-      count = 0;
     }
 
   }
