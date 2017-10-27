@@ -93,8 +93,7 @@ function buildTable(groups) {
     tr.id('row'+i);
     tr.class('tablecell');
     var where = 'groupbody';
-    //console.log(where);
-    //tr.parent(where);
+    tr.parent(where);
 
     var td = createElement('td');
     td.html(i);
