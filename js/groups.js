@@ -26,7 +26,7 @@ function setup() {
 
   //var shuffleButton = select('#shuffle');
 
-  var timing = 10;
+  var timing = 5;
   var howmany = 0;
 
   //shuffleButton.mousePressed(function() {
@@ -104,7 +104,7 @@ function buildTable(groups) {
       var td = createElement('td');
       td.html(groups[i][j]);
       td.class('tablecell');
-      td.style('width', '300px')
+      //td.style('width', '300px')
       td.parent('row'+i);
     }
 
