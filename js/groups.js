@@ -1,4 +1,5 @@
 function setup() {
+  noCanvas();
   loadFirebase(loaded);
 
   var params = getURLParams();
@@ -93,7 +94,12 @@ function buildTable(groups) {
     tr.class('tablecell');
     var where = 'groupbody';
     //console.log(where);
-    tr.parent(where);
+    //tr.parent(where);
+
+    var td = createElement('td');
+    td.html(i);
+    td.class('tablecell');
+    td.parent('row'+i);
 
     for (var j = 0; j < groups[i].length; j++) {
       var td = createElement('td');

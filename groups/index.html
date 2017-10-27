@@ -10,13 +10,20 @@
   <style>
 
     tr {
-      margin-bottom: 20px;
+        }
+
+    tr:nth-child(2n+1) .tablecell {
+        background-color: #EEE;
+    }
+
+    td {
+      border-top: #000 solid
     }
 
     .tablecell {
+      border-top: 1px solid #cdd0d4;
       background-color: #CCC;
       padding: 4px;
-      margin-bottom: 20px;
     }
 
     .button {
@@ -50,9 +57,8 @@
   <!--<p><button id = "shuffle">shuffle</button></p>-->
 
 
-  <h2>Groups</h2>
 
-  <table>
+  <table style="border-spacing: 0px 10px;">
     <thead>
       <tr id="group">
       </tr>
