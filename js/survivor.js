@@ -30,7 +30,8 @@ var cellDiedSound;
 
 function setup() {
   //Load the death sound... (that sounds horrible :c )
-  cellDiedSound = loadSound('../assets/cellDeath.mp3');
+  // commented out because it was throwing errors
+  // cellDiedSound = loadSound('../assets/cellDeath.mp3');
 
   // Make the canvas full screen size
   canvas = createCanvas(windowWidth, windowHeight);

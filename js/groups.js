@@ -3,7 +3,8 @@ function setup() {
   loadFirebase(loaded);
 
   var params = getURLParams();
-  var seed = Number(params.seed.substring(0,1))
+  // var seed = Number(params.seed.substring(0,1))
+  var seed = int(Math.random(params.id)*100)
 
   function loaded() {
     if (!names) {

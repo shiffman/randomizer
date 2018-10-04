@@ -29,11 +29,10 @@ function sendToFirebase(names, elt) {
       console.log("ooops, something went wrong.");
       console.log(err);
     } else {
-      var url1 = 'groups/?id=' + id;
-      var url2 = 'spin/?id=' + id;
-      var url3 = 'survivor/?id=' + id;
-      var url4 = 'plinko/?id=' + id;
-      //var url = 'http://localhost:8001/spin.html?id='+id;
+      var url1 = 'groups/index.html?id=' + id;
+      var url2 = 'spin/index.html?id=' + id;
+      var url3 = 'survivor/index.html?id=' + id;
+      var url4 = 'plinko/index.html?id=' + id;
       elt.html('<a href="' + url2 + '">spin</a><br />' + '<a href="' + url1 + '">groups</a><br />' + '<a href="' + url3 + '">survivor</a><br />' + '<a href="' + url4 + '">plinko</a><br />');
     }
   }

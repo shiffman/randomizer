@@ -38,12 +38,13 @@ function Cell(name){
 		text(this.name, this.pos.x - this.name.length * 3.25, this.pos.y);
 
 		//Play the "death?" sound only once
-		if(this.dead){
-			if(!this.soundPlayed){
-				cellDiedSound.play();
-				this.soundPlayed = true;
-			}
-		}
+		// commenting out because it throws errors in chrome
+		// if(this.dead){
+		// 	if(!this.soundPlayed){
+		// 		cellDiedSound.play();
+		// 		this.soundPlayed = true;
+		// 	}
+		// }
 	}
 
 	//Check if we collide with a cell, if so, "kills" the smaller one.
